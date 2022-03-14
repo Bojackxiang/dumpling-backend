@@ -16,3 +16,6 @@ benchmarks/graphs
 # https://git-scm.com/docs/gitignore
 
 .vscode
+
+build
+dist
