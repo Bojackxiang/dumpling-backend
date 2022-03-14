@@ -4,24 +4,24 @@ import config from "./config";
 import { resolvers, schemas } from "./graphql";
 
 const start = () => {
-  const app = express();
+    const app = express();
 
-  app.use(
-      '/graphql',
-      graphqlHTTP({
-          schema: schemas,
-          rootValue: resolvers,
-          graphiql: true,
-      }),
-  );
+    app.use(
+        "/graphql",
+        graphqlHTTP({
+            schema: schemas,
+            rootValue: { ...resolvers.Query, ...resolvers.Mutations },
+            graphiql: true,
+        })
+    );
 
-  app.get("/", (req, res) => {
-    res.send("Hello World!");
-  });
+    app.get("/", (req, res) => {
+        res.send("Hello World!");
+    });
 
-  app.listen(config.port, () => {
-    console.log("starting .....");
-  });
+    app.listen(config.port, () => {
+        console.log("starting .....");
+    });
 };
 
 export default start;

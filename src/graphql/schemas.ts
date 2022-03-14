@@ -1,11 +1,15 @@
 import { buildSchema } from "graphql";
 
 const schemas = buildSchema(`
-type Query {
-    hello: String
+type User {
+    username: String
 }
-type Subscription {
-    countDown: Int
+type Query {
+    hello: User
+}
+
+type Mutation {
+    hello2: String
 }
 `);
 
