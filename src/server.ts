@@ -3,7 +3,7 @@ import { graphqlHTTP } from "express-graphql";
 import config from "./config";
 import { resolvers, schemas } from "./graphql";
 
-const start = () => {
+export const start = () => {
     const app = express();
 
     app.use(
@@ -15,13 +15,19 @@ const start = () => {
         })
     );
 
-    app.get("/", (req, res) => {
+    app.get("/test", (req, res) => {
         res.send("Hello World!");
     });
+
+    app.get("/tes2", (req, res) => {
+        res.send("Hello World!");
+    });
+
 
     app.listen(config.port, () => {
         console.log("starting .....");
     });
 };
+
 
 export default start;
