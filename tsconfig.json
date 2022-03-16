@@ -1,22 +1,18 @@
 {
-    "compilerOptions": {
-      "module": "commonjs",
-      "declaration": true,
-      "removeComments": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "target": "es6",
-      "sourceMap": true,
-      "outDir": "./build/",
-      "baseUrl": "./",
-      "paths": {
-      "@models": ["./src/models/index.ts"],
-      },
-      "incremental": true
-    },
-    "include": ["."],
-    "exclude": ["node_modules", "dist"],
-    "ts-node": {
-        "require": ["tsconfig-paths/register"]
-      }
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es6",
+    "sourceMap": true,
+    "outDir": "./build/",
+    "incremental": true
+  },
+  "include": ["."],
+  "exclude": ["node_modules", "dist"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
   }
+}
