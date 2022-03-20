@@ -1,5 +1,5 @@
 import * as express from "express";
-import { body, validationResult } from "express-validator";
+import { body } from "express-validator";
 import { signUp } from "../../controllers/auth";
 
 const router = express.Router();

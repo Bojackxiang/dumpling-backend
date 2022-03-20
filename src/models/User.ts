@@ -12,6 +12,7 @@ interface UserAttrs {
   phone?: string;
   password: string;
   nick_name: string;
+  isActive?: boolean
 }
 interface UserModel extends mongoose.Model<UserDoc> {
   build(attrs: UserAttrs): UserDoc;
@@ -34,6 +35,10 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: String,
       required: true,
+    },
+    isActive: {
+      type: Boolean,
+      default: false,
     },
   },
   {
