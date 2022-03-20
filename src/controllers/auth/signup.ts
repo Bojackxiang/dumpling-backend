@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
+import { signUp } from "../../services/auth";
 
 const signup = (req: Request, res: Response) => {
   const errors = validationResult(req);
@@ -8,14 +9,18 @@ const signup = (req: Request, res: Response) => {
     throw errors;
   }
 
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).json({
-      error: "Email and password are required",
-    });
-  }
+  const { email, password, nick_name, phone } = req.body;
 
-  res.json({})
+  signUp({
+    email,
+    password,
+    nick_name,
+    phone
+  })
+
+  res.json({
+    success: true
+  })
 };
 
 export default signup;

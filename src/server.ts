@@ -3,15 +3,15 @@ import { graphqlHTTP } from "express-graphql";
 import * as mongoose from "mongoose";
 import config from "./config";
 import { resolvers, schemas } from "./Graphql-tool";
-import {authRouters} from "./routers";
 import { json } from 'body-parser';
+import router from "./routers";
 
 export const start = async () => {
   try {
     
     const app = express();
     app.use(json());
-    app.use(authRouters);
+    
     app.use(
       "/graphql",
       graphqlHTTP({
@@ -20,7 +20,10 @@ export const start = async () => {
         graphiql: true,
       })
     );
+    
     await mongoose.connect(config.MONGO_URI);
+
+    app.use(router)
 
     app.get("/test", (req, res) => {
       res.send("Hello World!");
