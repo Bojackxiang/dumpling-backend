@@ -25,14 +25,6 @@ export const start = async () => {
 
     app.use(router)
 
-    app.get("/test", (req, res) => {
-      res.send("Hello World!");
-    });
-
-    app.get("/tes2", (req, res) => {
-      res.send("Hello World!");
-    });
-
     app.listen(config.port, () => {
       console.log("starting .....");
     });
