@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { signUp } from "../../services/auth";
+import {signUp} from "../../services/auth";
 
 const signup = (req: Request, res: Response) => {
   const errors = validationResult(req);

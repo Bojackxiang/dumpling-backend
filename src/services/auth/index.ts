@@ -1,2 +1,2 @@
-export * from './existingUser'
-export * from './signUp'
+export * from "./existingUser";
+export * from "./signup";

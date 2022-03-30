@@ -17,8 +17,12 @@ type Query {
     hello: User
 }
 
+input sampleInput {
+  name: String
+}
+
 type Mutation {
-    hello2: String
+    hello2(input: sampleInput): String
     signUp(input: signUpInput): Void
 }
 `);
