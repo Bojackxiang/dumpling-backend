@@ -3,15 +3,16 @@ import { graphqlHTTP } from "express-graphql";
 import * as mongoose from "mongoose";
 import config from "./config";
 import { resolvers, schemas } from "./Graphql-tool";
-import { json } from 'body-parser';
+import { json } from "body-parser";
 import router from "./routers";
-
+import graphqlPlayground from "graphql-playground-middleware-express";
+import * as cors from 'cors'
 export const start = async () => {
   try {
-    
     const app = express();
     app.use(json());
-    
+    app.use(cors())
+
     app.use(
       "/graphql",
       graphqlHTTP({
@@ -20,16 +21,16 @@ export const start = async () => {
         graphiql: true,
       })
     );
-    
+
     await mongoose.connect(config.MONGO_URI);
+    app.get("/playground", graphqlPlayground({ endpoint: "/graphql" }));
+    app.use(router);
 
-    app.use(router)
-
-    app.listen(config.port, () => {
-      console.log("starting .....");
+    app.listen(config.BACKEND_PORT, () => {
+      console.log(`starting ..... MODE: ${config.MODE} ....., PORT: ${config.BACKEND_PORT}`);
     });
   } catch (error) {
-    throw error
+    throw error;
   }
 };
 

@@ -1,0 +1,14 @@
+# FROM node:14.14.0-alpine
+FROM node:14.17.0-alpine
+WORKDIR '/app'
+
+COPY package.json .
+
+ RUN npm install\
+     && npm install typescript -g
+
+COPY . .
+
+RUN npm run build
+
+CMD ["npm", "run", "serve:dev"]

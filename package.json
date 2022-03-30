@@ -4,16 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.ts"
+    "start": "env-cmd -e dev nodemon ./src/index.ts",
+    "prod": "env-cmd -e prod nodemon ./src/index.ts",
+    "build": "rm -rf ./build && tsc --build",
+    "serve:dev": "env-cmd -e dev node --max_old_space_size=8048 ./build/index.js",
+    "serve:uat": "env-cmd -e uat node --max_old_space_size=8048 ./build/index.js",
+    "serve:prod": "env-cmd -e prod node --max_old_space_size=8048 ./build/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
+    "env-cmd": "^10.1.0",
     "express": "^4.17.3",
     "express-graphql": "^0.12.0",
+    "express-validator": "^6.11.1",
     "graphql": "^16.3.0",
-    "mongoose": "^6.2.7",
-    "express-validator": "^6.11.1"
+    "graphql-playground-middleware-express": "^1.7.23",
+    "mongoose": "^6.2.7"
   },
   "devDependencies": {
     "@types/express": "^4.17.13"
