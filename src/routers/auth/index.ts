@@ -1,6 +1,6 @@
 import * as express from "express";
 import { body } from "express-validator";
-import { signUp } from "../../controllers/auth";
+import { login, signUp } from "../../controllers/auth";
 
 const router = express.Router();
 
@@ -24,4 +24,16 @@ router.post(
   signUp
 );
 
-export default router
+router.post(
+  "/login",
+  [
+    body("email").isEmail().withMessage("Email must be valid"),
+    body("password")
+      .trim()
+      .isLength({ min: 4, max: 20 })
+      .withMessage("Password must be valid"),
+  ],
+  login
+);
+
+export default router;
