@@ -1,6 +1,5 @@
 import { UserExistedError } from "../../../errors/UserExistedError";
 import { User } from "../../../Models";
-import crypto from 'crypto'
 import { Password } from "../../../utils/password";
 
 interface ISignUp {
@@ -11,9 +10,9 @@ interface ISignUp {
 }
 const signUp = async (inputs: ISignUp) => {
   try {
-    const userExisted = await User.findExistingUser({email: inputs.email})
+    const userExisted = await User.findExistingUser({ email: inputs.email });
 
-    if(Boolean(userExisted)){
+    if (Boolean(userExisted)) {
       throw new UserExistedError();
     }
 
@@ -27,7 +26,7 @@ const signUp = async (inputs: ISignUp) => {
     // Save user
     await user.save();
   } catch (error) {
-    throw error
+    throw error;
   }
 };
 
