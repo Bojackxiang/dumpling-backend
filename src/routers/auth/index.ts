@@ -18,8 +18,8 @@ router.post(
       .withMessage("Nice name must be Validated"),
     body("phone")
       .trim()
-      .isLength({ min: 8, max: 10 })
-      .withMessage("Password must be between 4 and 20 characters"),
+      .isLength({ min: 5, max: 10 })
+      .withMessage("Phone must be valid"),
   ],
   signUp
 );

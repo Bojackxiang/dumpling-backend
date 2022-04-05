@@ -1,14 +1,17 @@
+import 'express-async-errors';
 import { graphqlHTTP } from "express-graphql";
 import { json } from "body-parser";
 import { resolvers, schemas } from "./Graphql-tool";
 import config from "./config";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import graphqlPlayground from "graphql-playground-middleware-express";
 import mongoose from "mongoose";
 import router from "./routers";
-import session from 'express-session'
-import cookieParser from 'cookie-parser'
+import session from "express-session";
+import { NotFoundError } from './errors/NotFoundError';
+import { errorHandler } from './middlewares/error-handler';
 
 export const start = async () => {
   try {
@@ -17,21 +20,6 @@ export const start = async () => {
     app.use(cors());
     app.use(cookieParser());
     app.use(session(config.sessionConfig));
-    
-  app.get("/set-session", (request:any, response) => {
-    request.session.name = "yunmu";
-    request.session.email = "yunmuteacher@qq.com";
-    response.send("登录成功");
-  });
-
-  app.get("/get-session", (request: any, response) => {
-    //读取session
-    //用户名
-    console.log("当前登录的用户为" + request.session.name);
-    console.log("当前登录的邮箱为" + request.session.email);
-    response.send("个人中心");
-  });
-  
 
     app.use(
       "/graphql",
@@ -42,9 +30,16 @@ export const start = async () => {
       })
     );
 
-    // await mongoose.connect(config.MONGO_URI);
+    await mongoose.connect(config.MONGO_URI);
     app.get("/playground", graphqlPlayground({ endpoint: "/graphql" }));
     app.use(router);
+
+    app.all('*', async (_, __, next) => {
+      const err = new NotFoundError();
+      next(err)
+    });
+
+    app.use(errorHandler);
 
     app.listen(config.BACKEND_PORT, () => {
       console.log(

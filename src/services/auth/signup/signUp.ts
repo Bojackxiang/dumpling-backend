@@ -13,7 +13,7 @@ const signUp = async (inputs: ISignUp) => {
     // create user
     const user = User.build({
       email: inputs.email,
-      password: inputs.password,
+      password: inputs.password, // TODO: 将密码加密
       nick_name: inputs.nick_name,
       phone: inputs.phone,
 

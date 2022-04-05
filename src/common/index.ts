@@ -1,1 +1,1 @@
-export {default as errorObject} from './errorsObject';
+export {default as messageObject} from './messageObject';
