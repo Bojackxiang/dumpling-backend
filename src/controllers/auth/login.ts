@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
+import { RequestValidationError } from "../../errors/request-validation-error";
 import * as auth from "../../services/auth";
 
 const login = async (req: Request, res: Response) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw errors;
+      throw new RequestValidationError(errors.array());
     }
     const { email, password } = req.body;
     const result = await auth.login({ email: email, password: password });
@@ -20,7 +21,6 @@ const login = async (req: Request, res: Response) => {
       throw result;
     }
   } catch (error) {
-    // TODO: 将所有的错误放在 index 中集中处理
     // TODO: 这边应该返回一个 jwt token
     res.json({
       success: false,

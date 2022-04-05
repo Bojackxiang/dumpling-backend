@@ -8,8 +8,12 @@ export default {
     message: "USER PASSWORD NOT CORRECT",
   },
   SUCCESS_LOGIN: {
-    code: 10001,
-    message: "USER PASSWORD NOT CORRECT",
+    code: 10002,
+    message: "SUCCESS LOGIN",
+  },
+  SUCCESS_SIGN_UP: {
+    code: 10003,
+    message: "SUCCESS SIGN UP",
   },
   ERROR_SYSTEM: {
     code: 20000,

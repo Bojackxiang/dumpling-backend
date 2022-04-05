@@ -43,7 +43,7 @@ export const start = async () => {
 
     app.listen(config.BACKEND_PORT, () => {
       console.log(
-        `starting ..... MODE: ${config.MODE} ....., PORT: ${config.BACKEND_PORT}`
+        `starting ...... MODE: ${config.MODE} ...... PORT: ${config.BACKEND_PORT}`
       );
     });
   } catch (error) {

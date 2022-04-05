@@ -22,7 +22,7 @@ const signUp = async (inputs: ISignUp) => {
     // Save user
     await user.save();
   } catch (error) {
-    console.log(error);
+    throw error
   }
 };
 
