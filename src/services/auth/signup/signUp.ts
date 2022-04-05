@@ -19,7 +19,7 @@ const signUp = async (inputs: ISignUp) => {
 
     const user = User.build({
       email: inputs.email,
-      password: await Password.toHash(inputs.password), // TODO: 将密码加密
+      password: await Password.toHash(inputs.password),
       nick_name: inputs.nick_name,
       phone: inputs.phone,
     });
