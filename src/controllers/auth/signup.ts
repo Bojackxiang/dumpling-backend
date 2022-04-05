@@ -12,6 +12,7 @@ const signup = async (req: Request, res: Response) => {
   }
   const { email, password, nick_name, phone } = req.body;
   
+  
   try {
     await signUp({
       email,

@@ -15,8 +15,12 @@ interface UserAttrs {
   isActive?: boolean
   role?: string
 }
+interface BaseUserAttrs {
+  email?: string; 
+}
 interface UserModel extends mongoose.Model<UserDoc> {
   build(attrs: UserAttrs): UserDoc;
+  findExistingUser(attrs: BaseUserAttrs): UserDoc;
 }
 
 const userSchema = new mongoose.Schema(
@@ -61,6 +65,9 @@ const userSchema = new mongoose.Schema(
 // 通过 mongoose 创建一个 user class， 并且给一个 static 方法
 userSchema.statics.build = (attrs: UserAttrs) => {
   return new User(attrs);
+};
+userSchema.statics.findExistingUser = async (input: BaseUserAttrs) => {
+  return User.findOne({ email: input.email })
 };
 const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
 

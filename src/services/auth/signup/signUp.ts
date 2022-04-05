@@ -1,3 +1,4 @@
+import { UserExistedError } from "../../../errors/UserExistedError";
 import { User } from "../../../Models";
 
 interface ISignUp {
@@ -8,15 +9,17 @@ interface ISignUp {
 }
 const signUp = async (inputs: ISignUp) => {
   try {
-    // TODO: check existing user
+    const userExisted = await User.findExistingUser({email: inputs.email})
 
-    // create user
+    if(Boolean(userExisted)){
+      throw new UserExistedError();
+    }
+
     const user = User.build({
       email: inputs.email,
       password: inputs.password, // TODO: 将密码加密
       nick_name: inputs.nick_name,
       phone: inputs.phone,
-
     });
 
     // Save user
