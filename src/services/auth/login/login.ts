@@ -3,6 +3,7 @@ import config from "../../../config"
 import { foundUserDTO } from "../../../DTO"
 import { User } from "../../../Models"
 import JWTUtils from "../../../utils/jwtUtils"
+import { Password } from "../../../utils/password"
 import ServiceResult from "../../serviceResult"
 
 
@@ -23,7 +24,8 @@ const login = async (input: UserInfoInput) => {
   }
 
   // case 2: user password is not correct 
-  if (foundUser.password !== input.password) {
+  const compareResult = await Password.compare(foundUser.password, input.password)
+  if (!compareResult) {
     return new ServiceResult(
       messageObject.ERROR_USER_PASSWORD_NOT_CORRECT.code,
       messageObject.ERROR_USER_PASSWORD_NOT_CORRECT.message,

@@ -3,7 +3,7 @@ export default {
   MODE: process.env.MODE,
   MONGO_URI:
     "mongodb+srv://dumpling-account:911004wsrA@cluster0.ee8ps.mongodb.net/dumpling?retryWrites=true&w=majority",
-  salt: "asd912980,.9,./.,",
+  salt: "awiskdnb",
   sessionConfig: {
     name: "dumpling_id",
     secret: "dumpling_qian_chu",
