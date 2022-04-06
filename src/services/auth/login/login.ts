@@ -38,8 +38,6 @@ const login = async (input: UserInfoInput) => {
     ...foundUserDTO(foundUser),
     token: jwtToken
   });
-
-
 }
 
 export default login;

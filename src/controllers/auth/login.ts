@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { CustomizedResponse, messageObject } from "../../common";
+import { LoginError } from "../../errors/LoginError";
 import { RequestValidationError } from "../../errors/request-validation-error";
 import * as auth from "../../services/auth";
 
@@ -23,10 +24,11 @@ const login = async (req: Request, res: Response) => {
         })
       );
     } else {
-      throw result;
+      throw result.getResult();
     }
   } catch (error) {
-    throw error;
+    console.log(error.message)
+    throw new LoginError(error.message)
   }
 };
 
