@@ -1,5 +1,8 @@
 import messageObject from "../../../common/messageObject"
+import config from "../../../config"
+import { foundUserDTO } from "../../../DTO"
 import { User } from "../../../Models"
+import JWTUtils from "../../../utils/jwtUtils"
 import ServiceResult from "../../serviceResult"
 
 
@@ -15,6 +18,7 @@ const login = async (input: UserInfoInput) => {
     return new ServiceResult(
       messageObject.ERROR_USER_NOT_FOUND.code,
       messageObject.ERROR_USER_NOT_FOUND.message,
+      false
     )
   }
 
@@ -23,11 +27,15 @@ const login = async (input: UserInfoInput) => {
     return new ServiceResult(
       messageObject.ERROR_USER_PASSWORD_NOT_CORRECT.code,
       messageObject.ERROR_USER_PASSWORD_NOT_CORRECT.message,
+      false
     )
   }
 
-
-  return new ServiceResult();
+  const jwtToken = JWTUtils.generateJWT(foundUserDTO(foundUser), config.salt)
+  return new ServiceResult(0, '', true, {
+    ...foundUserDTO(foundUser),
+    token: jwtToken
+  });
 
 
 }

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
+import { CustomizedResponse, messageObject } from "../../common";
 import { RequestValidationError } from "../../errors/request-validation-error";
 import * as auth from "../../services/auth";
 
@@ -11,20 +12,21 @@ const login = async (req: Request, res: Response) => {
     }
     const { email, password } = req.body;
     const result = await auth.login({ email: email, password: password });
-    
+
     // check result
     if (result.getSuccess()) {
-      res.json({
-        success: true,
-      });
+      res.json(
+        CustomizedResponse.responseBuilder({
+          statusCode: messageObject.SUCCESS_LOG_IN.code,
+          message: messageObject.SUCCESS_LOG_IN.message,
+          data: result.getResult(),
+        })
+      );
     } else {
       throw result;
     }
   } catch (error) {
-    // TODO: 这边应该返回一个 jwt token
-    res.json({
-      success: false,
-    });
+    throw error;
   }
 };
 

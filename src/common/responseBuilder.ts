@@ -11,7 +11,7 @@ export default class CustomizedResponse {
       statusCode: input.statusCode || 0,
       success: input.success || true,
       message: input.message || "",
-      data: input.data || {},
+      payload: input.data || {},
     };
   }
 }

@@ -11,7 +11,7 @@ class JWTUtils {
       },
       secret,
       {
-        expiresIn: "1s",
+        expiresIn,
       }
     );
   }
@@ -23,7 +23,7 @@ class JWTUtils {
       }
       return jwt.verify(token, secret);
     } catch (error) {
-      throw new Error(error.message)
+      throw new Error(error.message);
     }
   }
 }

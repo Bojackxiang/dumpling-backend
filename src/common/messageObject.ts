@@ -1,7 +1,7 @@
 export default {
   ERROR_USER_NOT_FOUND: {
     code: 10000,
-    message: "SYSTEM_ERROR",
+    message: "ERROR USER NOT FOUND",
   },
   ERROR_USER_PASSWORD_NOT_CORRECT: {
     code: 10001,
@@ -14,6 +14,10 @@ export default {
   SUCCESS_SIGN_UP: {
     code: 10003,
     message: "SUCCESS SIGN UP",
+  },
+  SUCCESS_LOG_IN: {
+    code: 10004,
+    message: "SUCCESS LOG IN",
   },
   ERROR_SYSTEM: {
     code: 20000,
