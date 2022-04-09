@@ -1,11 +1,12 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import { validationResult } from "express-validator";
-import { CustomizedResponse, messageObject } from "../../common";
+import { messageObject } from "../../common";
 import { LoginError } from "../../errors/LoginError";
 import { RequestValidationError } from "../../errors/request-validation-error";
+import { AppResponse } from "../../interfaces";
 import * as auth from "../../services/auth";
 
-const login = async (req: Request, res: Response) => {
+const login = async (req: Request, res: AppResponse) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -16,19 +17,18 @@ const login = async (req: Request, res: Response) => {
 
     // check result
     if (result.getSuccess()) {
-      res.json(
-        CustomizedResponse.responseBuilder({
-          statusCode: messageObject.SUCCESS_LOG_IN.code,
-          message: messageObject.SUCCESS_LOG_IN.message,
-          data: result.getResult(),
-        })
-      );
+      // TODO: 这边要存用户的 session 
+      res.json({
+        success: true,
+        data: result.getResult(),
+        code: messageObject.SUCCESS_LOGIN.code,
+        message: messageObject.SUCCESS_LOG_IN.message,
+      });
     } else {
       throw result.getResult();
     }
   } catch (error) {
-    console.log(error.message)
-    throw new LoginError(error.message)
+    throw new LoginError(error.message);
   }
 };
 
