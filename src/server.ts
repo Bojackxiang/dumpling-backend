@@ -21,6 +21,8 @@ export const start = async () => {
     app.use(cookieParser());
     app.use(session(config.sessionConfig));
 
+    // TODO: 这边要有 一个 middleware 来检查 用户 的 session
+
     app.use(
       "/graphql",
       graphqlHTTP({
