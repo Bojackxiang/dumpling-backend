@@ -45,6 +45,7 @@ export const start = async () => {
     app.use(errorHandler);
 
     app.listen(config.BACKEND_PORT, () => {
+      console.log(config)
       console.log(
         `starting ...... MODE: ${config.MODE} ...... PORT: ${config.BACKEND_PORT}`
       );
