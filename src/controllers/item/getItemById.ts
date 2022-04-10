@@ -1,6 +1,5 @@
 import { validationResult } from "express-validator";
 import { Request } from "express";
-import { NotFoundError } from "../../errors/NotFoundError";
 import { RequestValidationError } from "../../errors/request-validation-error";
 import { AppResponse } from "../../interfaces";
 import { getItemByIdSvc } from "../../services/item/get";
