@@ -19,6 +19,10 @@ export default {
     code: 10004,
     message: "SUCCESS LOG IN",
   },
+  SUCCESS_ITEM_CREATED: {
+    code: 10005,
+    message: "ITEM CREATED SUCCESSFULLY",
+  },
   ERROR_SYSTEM: {
     code: 20000,
     message: "SYSTEM ERROR",

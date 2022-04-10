@@ -1,74 +1,79 @@
 import * as mongoose from "mongoose";
 
-// 创建 user 相关的 三个 interface
+
 interface ItemDoc extends mongoose.Document {
-  email?: string;
-  phone?: string;
-  password: string;
-  nick_name: string;
+  name: string;
+  secondName?: string;
+  stocking: number;
+  price: number;
+  mainImage?: string;
+  descriptionImages?: string[];
+  description?: string;
 }
 export interface ItemAttrs {
-  email?: string;
-  phone?: string;
-  password: string;
-  nick_name: string;
-  isActive?: boolean
-  role?: string
+  name: string;
+  secondName?: string;
+  stocking: number;
+  price: number;
+  mainImage?: string;
+  descriptionImages?: string[];
+  description: string;
 }
-interface BaseUserAttrs {
-  email?: string; 
-}
-interface UserModel extends mongoose.Model<ItemDoc> {
+
+interface ItemModel extends mongoose.Model<ItemDoc> {
   build(attrs: ItemAttrs): ItemDoc;
-  findExistingUser(attrs: BaseUserAttrs): ItemDoc;
 }
 
 const itemSchema = new mongoose.Schema(
   {
-    email: {
+    name: {
       type: String,
       required: true,
     },
-    password: {
+    secondName: {
       type: String,
+      required: false,
+    },
+    stocking: {
+      type: Number,
+      required: false,
+      default: 999,
+    },
+    price: {
+      type: Number,
       required: true,
     },
-    nick_name: {
+    mainImage: {
       type: String,
-      required: true,
+      required: false,
     },
-    phone: {
+    descriptionImages: {
+      type: [String],
+      required: false,
+    },
+    description: {
       type: String,
-      required: true,
-    },
-    isActive: {
-      type: Boolean,
-      default: false,
-    },
-    role: {
-      type: String,
-      default: 'customer',
+      required: false,
     },
   },
   {
     toJSON: {
+      // 1. 可以控制 save 之后的返回
       transform(doc, ret) {
         ret.id = ret._id;
         delete ret._id;
-        delete ret.password;
         delete ret.__v;
+        delete ret.descriptionImages;;
       },
     },
   }
 );
 
-// 通过 mongoose 创建一个 user class， 并且给一个 static 方法
-itemSchema.statics.build = (attrs: ItemAttrs) => {
-  return new User(attrs);
-};
-itemSchema.statics.findExistingUser = async (input: BaseUserAttrs) => {
-  return User.findOne({ email: input.email })
-};
-const User = mongoose.model<ItemDoc, UserModel>("Item", itemSchema);
 
-export default User;
+itemSchema.statics.build = (attrs: ItemAttrs) => {
+  return new Item(attrs);
+};
+
+const Item = mongoose.model<ItemDoc, ItemModel>("Item", itemSchema);
+
+export default Item;
