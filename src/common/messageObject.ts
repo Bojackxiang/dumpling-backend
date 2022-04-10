@@ -23,6 +23,10 @@ export default {
     code: 10005,
     message: "ITEM CREATED SUCCESSFULLY",
   },
+  SUCCESS_GET_ITEM_BY_ID: {
+    code: 10006,
+    message: "ITEM GET SUCCESSFULLY",
+  },
   ERROR_SYSTEM: {
     code: 20000,
     message: "SYSTEM ERROR",

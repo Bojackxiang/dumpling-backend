@@ -37,6 +37,7 @@ export const start = async () => {
     app.use(router);
 
     app.all('*', async (_, __, next) => {
+      console.log('Not such a router')
       const err = new NotFoundError();
       next(err)
     });

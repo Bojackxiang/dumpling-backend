@@ -12,21 +12,16 @@ const getItemById = async (req: Request, res: AppResponse) => {
       throw new RequestValidationError(errors.array());
     }
     const { id } = req.params;
+
     const result = await getItemByIdSvc({ id });
 
-    // check result
-    if (result.getSuccess()) {
-      res.json({
-        success: true,
-        data: {},
-        code: 100,
-        message: "",
-      });
-    } else {
-      throw result.getResult();
-    }
+    res.json({
+      success: true, 
+      data: result,
+      code: 100,
+    })
   } catch (error) {
-    throw new NotFoundError();
+    throw error;
   }
 };
 

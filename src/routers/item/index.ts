@@ -1,7 +1,7 @@
 import * as express from "express";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { createItem } from "../../controllers/item";
-import get from "../../controllers/item/getItemById";
+import getItemById from "../../controllers/item/getItemById";
 
 const router = express.Router();
 
@@ -15,6 +15,10 @@ router.post(
   createItem
 );
 
-router.post("/item", get);
+router.get(
+  "/:id",
+  [param("id").exists().withMessage("商品id必须存在")],
+  getItemById
+);
 
 export default router;
