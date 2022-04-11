@@ -6,6 +6,7 @@ import { createItemSvc } from "../../services/item/create";
 
 const createItem = async (req: Request, res: AppResponse) => {
   try {
+    // TODO: 这边需要做一个 middleware 来检查 用户 的 session
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       throw new RequestValidationError(errors.array());

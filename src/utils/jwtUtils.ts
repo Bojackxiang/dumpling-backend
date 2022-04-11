@@ -21,9 +21,18 @@ class JWTUtils {
       if (!token || !secret) {
         return undefined;
       }
-      return jwt.verify(token, secret);
+      const parsedToken = jwt.verify(token, secret);
+      return {
+        data: parsedToken.data,
+        success: true,
+        token: token,
+      };
     } catch (error) {
-      throw new Error(error.message);
+      return {
+        success: false,
+        token: token,
+        data: undefined
+      };
     }
   }
 }

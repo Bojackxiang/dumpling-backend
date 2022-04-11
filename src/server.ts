@@ -22,7 +22,6 @@ export const start = async () => {
     app.use(session(config.sessionConfig));
 
     // TODO: 这边要有 一个 middleware 来检查 用户 的 session
-
     app.use(
       "/graphql",
       graphqlHTTP({
@@ -37,7 +36,6 @@ export const start = async () => {
     app.use(router);
 
     app.all('*', async (_, __, next) => {
-      console.log('Not such a router')
       const err = new NotFoundError();
       next(err)
     });
@@ -45,10 +43,13 @@ export const start = async () => {
     app.use(errorHandler);
 
     app.listen(config.BACKEND_PORT, () => {
-      console.log(config)
-      console.log(
-        `starting ...... MODE: ${config.MODE} ...... PORT: ${config.BACKEND_PORT}`
-      );
+      if(config.MODE === 'DEVELOPMENT'){
+        console.log(config)
+        console.log(
+          `starting ...... MODE: ${config.MODE} ...... PORT: ${config.BACKEND_PORT}`
+        );
+      }
+      
     });
   } catch (error) {
     throw error;

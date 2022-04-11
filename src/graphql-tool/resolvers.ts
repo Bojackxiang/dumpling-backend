@@ -10,7 +10,6 @@ const resolvers = {
     },
     Mutations: {
         hello2: (root, ) => {
-            console.log(root)
             return "hello from hello2"
         },
         async signUp(root, args, context, info) {
