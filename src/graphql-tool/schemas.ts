@@ -1,4 +1,4 @@
-import { buildSchema } from "graphql";
+import { buildSchema } from 'graphql';
 
 const schemas = buildSchema(`
 type User {
@@ -26,6 +26,5 @@ type Mutation {
     signUp(input: signUpInput): Void
 }
 `);
-
 
 export default schemas;

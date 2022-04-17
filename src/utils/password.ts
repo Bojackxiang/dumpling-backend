@@ -1,21 +1,21 @@
-import { scrypt} from 'crypto';
+import { scrypt } from 'crypto';
 import { promisify } from 'util';
 import config from '../config';
 
 const scryptAsync = promisify(scrypt);
 
 export class Password {
-  static async toHash(password: string) {
-    const salt = config.salt
-    const buf = (await scryptAsync(password, salt, 64)) as Buffer;
+    static async toHash(password: string) {
+        const salt = config.salt;
+        const buf = (await scryptAsync(password, salt, 64)) as Buffer;
 
-    return `${buf.toString('hex')}.${salt}`;
-  }
+        return `${buf.toString('hex')}.${salt}`;
+    }
 
-  static async compare(storedPassword: string, suppliedPassword: string) {
-    const [hashedPassword, salt] = storedPassword.split('.');
-    const buf = (await scryptAsync(suppliedPassword, salt, 64)) as Buffer;
+    static async compare(storedPassword: string, suppliedPassword: string) {
+        const [hashedPassword, salt] = storedPassword.split('.');
+        const buf = (await scryptAsync(suppliedPassword, salt, 64)) as Buffer;
 
-    return buf.toString('hex') === hashedPassword;
-  }
+        return buf.toString('hex') === hashedPassword;
+    }
 }

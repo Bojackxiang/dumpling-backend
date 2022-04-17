@@ -1,1 +1,1 @@
-export {default as adminAuth} from './admin-auth'
+export { default as adminAuth } from './admin-auth';

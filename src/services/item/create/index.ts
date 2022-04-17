@@ -1,1 +1,1 @@
-export { default as createItemSvc } from './createItem'
+export { default as createItemSvc } from './createItem';

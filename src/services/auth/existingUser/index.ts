@@ -1,1 +1,1 @@
-export {default as existingUser} from './existingUser'
+export { default as existingUser } from './existingUser';

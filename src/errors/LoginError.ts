@@ -1,17 +1,17 @@
-import { CustomError } from "./custom-error";
+import { CustomError } from './custom-error';
 
 export class LoginError extends CustomError {
-  statusCode = 500;
-  reason = "登陆信息错误";
+    statusCode = 500;
+    reason = '登陆信息错误';
 
-  constructor(message: string) {
-    super(message ?? "登陆信息错误");
-    this.reason = message ?? "登陆信息错误"
+    constructor(message: string) {
+        super(message ?? '登陆信息错误');
+        this.reason = message ?? '登陆信息错误';
 
-    Object.setPrototypeOf(this, LoginError.prototype);
-  }
+        Object.setPrototypeOf(this, LoginError.prototype);
+    }
 
-  serializeErrors() {
-    return [{ message: this.reason}];
-  }
+    serializeErrors() {
+        return [{ message: this.reason }];
+    }
 }

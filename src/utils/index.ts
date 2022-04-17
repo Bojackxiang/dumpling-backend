@@ -1,1 +1,1 @@
-export { default as jwtUtils } from './jwtUtils'
+export { default as jwtUtils } from './jwtUtils';

@@ -1,1 +1,1 @@
-export { AppResponse } from "./appResponse";
+export { AppResponse } from './appResponse';

@@ -1,5 +1,3 @@
-const existingUser = () => {
+const existingUser = () => {};
 
-}
-
-export default existingUser
+export default existingUser;

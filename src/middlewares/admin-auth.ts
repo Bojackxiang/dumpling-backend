@@ -4,31 +4,30 @@
  *
  */
 
-import { NextFunction, Request } from "express";
-import { roles } from "../common";
-import config from "../config";
-import JWTUtils from "../utils/jwtUtils";
+import { NextFunction, Request } from 'express';
+import { roles } from '../common';
+import config from '../config';
+import JWTUtils from '../utils/jwtUtils';
 
 const adminAuth = (req: Request, _, next: NextFunction) => {
-  // check if the bearer token existed
-  const bearerHeader = req.headers["authorization"];
-  if (typeof bearerHeader !== "undefined") {
-    const bearer = bearerHeader.split(" ");
-    const bearerToken = bearer[1];
-    const verification = JWTUtils.verifyJWT(bearerToken, config.salt);
-    
-    
-    if (verification.success) {
-      if(verification.data.role !== roles.ADMIN){
-        throw new Error("Only admin allowed");
-      }
-      next();
+    // check if the bearer token existed
+    const bearerHeader = req.headers['authorization'];
+    if (typeof bearerHeader !== 'undefined') {
+        const bearer = bearerHeader.split(' ');
+        const bearerToken = bearer[1];
+        const verification = JWTUtils.verifyJWT(bearerToken, config.salt);
+
+        if (verification.success) {
+            if (verification.data.role !== roles.ADMIN) {
+                throw new Error('Only admin allowed');
+            }
+            next();
+        } else {
+            throw new Error('Invalid token');
+        }
     } else {
-      throw new Error("Invalid token");
+        throw new Error('Not Authorized');
     }
-  } else {
-    throw new Error("Not Authorized");
-  }
 };
 
 export default adminAuth;
