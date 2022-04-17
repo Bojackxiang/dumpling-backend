@@ -1,8 +1,15 @@
-import * as express from 'express';
-import { body, param } from 'express-validator';
-import { createItem } from '../../controllers/item';
-import getItemById from '../../controllers/item/getItemById';
+// common
 import { adminAuth } from '../../middlewares';
+import { body, param } from 'express-validator';
+import {
+    createItem,
+    getItemList,
+    deleteItem as deleteItemById,
+    updateItemById,
+    getItem as getItemById,
+} from '../../controllers/item';
+import * as express from 'express';
+// controllers
 
 const router = express.Router();
 
@@ -21,6 +28,26 @@ router.get(
     '/:id',
     [param('id').exists().withMessage('商品id必须存在')],
     getItemById
+);
+
+router.get(
+    '/list/:page',
+    [param('page').exists().withMessage('page数必须存在')],
+    getItemList
+);
+
+router.delete(
+    '/:id',
+    [param('id').exists().withMessage('商品id必须存在')],
+    adminAuth,
+    deleteItemById
+);
+
+router.put(
+    '/',
+    [body('id').exists().withMessage('商品id必须存在')],
+    adminAuth,
+    updateItemById
 );
 
 export default router;

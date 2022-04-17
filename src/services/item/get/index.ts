@@ -1,1 +1,1 @@
-export { default as getItemByIdSvc } from './getItemById';
+export { default as getItemById } from './getItemById';

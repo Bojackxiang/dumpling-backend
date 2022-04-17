@@ -27,6 +27,10 @@ export default {
         code: 10006,
         message: 'ITEM GET SUCCESSFULLY',
     },
+    SUCCESS_DELETE_ITEM_BY_ID: {
+        code: 10007,
+        message: 'ITEM DELETE SUCCESSFULLY',
+    },
     ERROR_SYSTEM: {
         code: 20000,
         message: 'SYSTEM ERROR',
