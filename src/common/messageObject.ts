@@ -31,6 +31,10 @@ export default {
         code: 10007,
         message: 'ITEM DELETE SUCCESSFULLY',
     },
+    SUCCESS_CREATE_ORDER: {
+        code: 10008,
+        message: 'ORDER CREATED SUCCESSFULLY',
+    },
     ERROR_SYSTEM: {
         code: 20000,
         message: 'SYSTEM ERROR',
