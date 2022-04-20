@@ -1,13 +1,16 @@
 import { currentDate } from '../../utils';
 import { messageObject, orderDeliveryMethod } from '../../common';
 import { Order } from '../../Models';
-import { orderValidation } from './utils';
+import { orderPriceCalculator, orderValidation } from './utils';
 import ServiceResult from '../serviceResult';
 
+export interface IOrderItem {
+    itemId: string;
+    quantity: number;
+}
 export interface IOrderAttrs {
-    itemIds: string[];
+    items: IOrderItem[];
     customerId: string;
-    orderPrice: number;
     orderStatusCode?: string;
     orderAddress?: string;
     orderPhone: string;
@@ -24,12 +27,21 @@ const createOrder: ICreateOrder = async (inputs) => {
         // order validation
         orderValidation(inputs);
 
+        // check items quantity
+        const checkedItems = inputs.items.filter(
+            (item: IOrderItem) => item.quantity > 0
+        );
+
+        // calculate the order price
+        const calculatedPrice = await orderPriceCalculator(checkedItems);
+
+        // build the order
         const order = Order.build({
+            items: checkedItems,
             orderCreatedAt: currentDate(),
             orderUpdatedAt: currentDate(),
-            itemIds: inputs.itemIds,
+            orderPrice: calculatedPrice,
             customerId: inputs.customerId,
-            orderPrice: inputs.orderPrice,
             orderAddress: inputs.orderAddress || '',
             orderPhone: inputs.orderPhone,
             orderEmail: inputs.orderEmail || '',

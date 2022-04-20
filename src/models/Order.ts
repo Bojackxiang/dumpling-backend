@@ -1,10 +1,11 @@
 import * as mongoose from 'mongoose';
 import { orderDeliveryMethod, orderStatus } from '../common';
+import { IOrderItem } from '../services/order/createOrder';
 
 interface OrderDoc extends mongoose.Document {
     orderCreatedAt: string;
     orderUpdatedAt: string;
-    itemIds: string[];
+    items: IOrderItem[];
     customerId: string;
     orderPrice: number;
     orderStatusCode?: string;
@@ -19,7 +20,7 @@ interface OrderDoc extends mongoose.Document {
 export interface OrderAttrs {
     orderCreatedAt: string;
     orderUpdatedAt: string;
-    itemIds: string[];
+    items: IOrderItem[];
     customerId: string;
     orderPrice: number;
     orderStatusCode?: string;
@@ -45,8 +46,17 @@ const orderSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        itemIds: {
-            type: [String],
+        items: {
+            type: [
+                {
+                    itemId: {
+                        type: String,
+                    },
+                    quantity: {
+                        type: Number,
+                    },
+                },
+            ],
             required: true,
         },
         customerId: {

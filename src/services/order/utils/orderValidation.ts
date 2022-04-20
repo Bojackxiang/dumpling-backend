@@ -3,13 +3,8 @@ import { IOrderAttrs } from '../createOrder';
 
 const orderValidation = (inputs: IOrderAttrs) => {
     // check items
-    if (!inputs.itemIds || inputs.itemIds.length === 0) {
+    if (!inputs.items || inputs.items.length === 0) {
         throw new Error('items is required');
-    }
-
-    // check order price is number
-    if (typeof inputs.orderPrice !== 'number') {
-        throw new Error('order price must be number');
     }
 
     // check order phone
