@@ -10,11 +10,11 @@ type IDeleteOrderById = (input: IOrderAttrs) => Promise<ServiceResult<any>>;
 
 const deleteOrderById: IDeleteOrderById = async (inputs) => {
     try {
-        const response = await Order.findOneAndDelete({
+        // TODO: 如果已经开始做单，就不能删除
+
+        await Order.findOneAndDelete({
             id: inputs.id,
         });
-
-        console.log(response);
 
         return new ServiceResult(
             messageObject.SUCCESS_CREATE_ORDER.code,
