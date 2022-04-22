@@ -8,7 +8,7 @@ import cors from 'cors';
 import express from 'express';
 import graphqlPlayground from 'graphql-playground-middleware-express';
 import mongoose from 'mongoose';
-import router from './routers';
+import router from '@/routers';
 import session from 'express-session';
 import { NotFoundError } from './errors/NotFoundError';
 import { errorHandler } from './middlewares/error-handler';

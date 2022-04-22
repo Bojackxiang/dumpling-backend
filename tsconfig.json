@@ -9,7 +9,19 @@
         "sourceMap": true,
         "outDir": "./build/",
         "incremental": true,
-        "esModuleInterop": true
+
+        // Module resolution
+        "baseUrl": "./", // Sets a base directory to resolve non-absolute module names
+        "esModuleInterop": true, // fixes some issues TS originally had with the ES6 spec where TypeScript treats CommonJS/AMD/UMD modules similar to ES6 module
+        "moduleResolution": "node", // Pretty much always node for modern JS. Other option is "classic"
+        "paths": {
+            "@/*": ["src/*"]
+        }, // A series of entries which re-map imports to lookup locations relative to the baseUrl
+        "typeRoots": [
+            "../node_modules/@types",
+            "node_modules/@types",
+            "src/types"
+        ]
     },
     "include": ["."],
     "exclude": ["node_modules", "dist"]
