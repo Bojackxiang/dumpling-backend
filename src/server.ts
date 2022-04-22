@@ -49,6 +49,7 @@ export const start = async () => {
                     `starting ...... MODE: ${config.MODE} ...... PORT: ${config.BACKEND_PORT}`
                 );
             }
+            console.log('running');
         });
     } catch (error) {
         throw error;
