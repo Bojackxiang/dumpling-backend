@@ -6,7 +6,7 @@
     "scripts": {
         "start": "env-cmd -e dev nodemon",
         "prod": "env-cmd -e prod nodemon ./src/index.ts",
-        "build": "rm -rf ./build && tsc --build",
+        "build": "rimraf build && tsc -p tsconfig.json && tsc-alias -p tsconfig.json --silent",
         "serve:dev": "env-cmd -e dev node --max_old_space_size=8048 ./build/index.js",
         "serve:uat": "env-cmd -e uat node --max_old_space_size=8048 ./build/index.js",
         "serve:prod": "env-cmd -e prod node --max_old_space_size=8048 ./build/index.js"
