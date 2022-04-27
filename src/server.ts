@@ -12,14 +12,20 @@ import router from '@/routers';
 import session from 'express-session';
 import { NotFoundError } from './errors/NotFoundError';
 import { errorHandler } from './middlewares/error-handler';
+import socketlization from 'express-ws';
+import websocketApp from './websocket';
 
 export const start = async () => {
     try {
-        const app = express();
+        const app: any = express();
+        socketlization(app);
+
         app.use(json());
         app.use(cors());
         app.use(cookieParser());
         app.use(session(config.sessionConfig));
+
+        app.use(websocketApp);
 
         // TODO: 这边要有 一个 middleware 来检查 用户 的 session
         app.use(
@@ -49,7 +55,6 @@ export const start = async () => {
                     `starting ...... MODE: ${config.MODE} ...... PORT: ${config.BACKEND_PORT}`
                 );
             }
-            console.log('running');
         });
     } catch (error) {
         throw error;
