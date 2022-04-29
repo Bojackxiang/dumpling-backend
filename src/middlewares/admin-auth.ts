@@ -6,7 +6,7 @@
 
 import { NextFunction, Request } from 'express';
 import { roles } from '../common';
-import config from '../config';
+import config from '../appConfig';
 import JWTUtils from '../utils/jwtUtils';
 
 const adminAuth = (req: Request, _, next: NextFunction) => {

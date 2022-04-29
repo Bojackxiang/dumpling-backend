@@ -1,6 +1,6 @@
 import { scrypt } from 'crypto';
 import { promisify } from 'util';
-import config from '../config';
+import config from '../appConfig';
 
 const scryptAsync = promisify(scrypt);
 

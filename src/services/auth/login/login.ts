@@ -1,5 +1,5 @@
 import messageObject from '../../../common/messageObject';
-import config from '../../../config';
+import config from '../../../appConfig';
 import { foundUserDTO } from '../../../DTO';
 import { User } from '../../../Models';
 import JWTUtils from '../../../utils/jwtUtils';

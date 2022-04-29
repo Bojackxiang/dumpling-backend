@@ -1,0 +1,56 @@
+paths:
+  /auth/signup/:
+    post:
+      tags:
+        - User
+      summary: 用户注册
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: sign up
+          description: It enables a user to create an account
+          required: false
+          schema:
+            $ref: "#/definitions/signUp"
+      responses:
+        201:
+          description: An object with user details
+  /auth/login:
+    post:
+      tags:
+        - User
+      summary: 用户登录
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: log in
+          description: User login
+          required: false
+          schema:
+            $ref: "#/definitions/login"
+      responses:
+        201:
+          description: An object with user details
+definitions:
+  signUp:
+    type: object
+    properties:
+      email:
+        type: string
+      nick_name:
+        type: string
+      phone:
+        type: string
+      password:
+        type: string
+  login:
+    type: object
+    properties:
+      email:
+        type: string
+        default: email@email.com
+      password:
+        type: string
+        default: password
